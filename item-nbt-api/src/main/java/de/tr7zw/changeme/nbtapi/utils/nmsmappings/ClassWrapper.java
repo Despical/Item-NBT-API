@@ -96,9 +96,6 @@ public enum ClassWrapper {
                 clazz = Class.forName(mojangMap + "." + clazzName);
             } else if (packageId == PackageWrapper.NONE) {
                 clazz = Class.forName(clazzName);
-            } else if (MinecraftVersion.isForgePresent() && MinecraftVersion.getVersion() == MinecraftVersion.MC1_7_R4
-                    && Forge1710Mappings.getClassMappings().get(this.name()) != null) {
-                clazz = Class.forName(clazzName = Forge1710Mappings.getClassMappings().get(this.name()));
             } else {
                 String version = MinecraftVersion.getVersion().getPackageName();
                 clazz = Class.forName(packageId.getUri() + "." + version + "." + clazzName);

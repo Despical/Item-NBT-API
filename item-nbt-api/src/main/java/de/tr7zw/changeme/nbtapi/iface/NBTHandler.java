@@ -1,15 +1,12 @@
 package de.tr7zw.changeme.nbtapi.iface;
 
-import javax.annotation.Nonnull;
-
 public interface NBTHandler<T> {
 
-    public default boolean fuzzyMatch(Object obj) {
+    default boolean fuzzyMatch(Object obj) {
         return false;
     }
 
-    public void set(@Nonnull ReadWriteNBT nbt, @Nonnull String key, @Nonnull T value);
+    void set(ReadWriteNBT nbt, String key, T value);
 
-    public T get(@Nonnull ReadableNBT nbt, @Nonnull String key);
-
+    T get(ReadableNBT nbt, String key);
 }

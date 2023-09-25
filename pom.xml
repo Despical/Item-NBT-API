@@ -19,9 +19,6 @@
   </licenses>
   <modules>
     <module>item-nbt-api</module>
-    <module>nbt-injector</module>
-    <module>nbt-data-api</module>
-    <module>mappings-parser</module>
   </modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -109,22 +106,6 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.6.0</version>
-        <configuration>
-          <source>8</source>
-        </configuration>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>com.github.ekryd.sortpom</groupId>
         <artifactId>sortpom-maven-plugin</artifactId>
         <version>3.0.0</version>
@@ -133,29 +114,6 @@
             <id>sortpom</id>
             <goals>
               <goal>verify</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>license-maven-plugin</artifactId>
-        <version>2.2.0</version>
-        <configuration>
-          <licenseName>mit</licenseName>
-          <licenseFile>LICENSE</licenseFile>
-          <force>true</force>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>dev.tr7zw.nojitpack.maven</groupId>
-        <artifactId>no-jitpack-maven-plugin</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-        <executions>
-          <execution>
-            <id>antijitpack</id>
-            <goals>
-              <goal>antijitpack</goal>
             </goals>
           </execution>
         </executions>
@@ -187,15 +145,9 @@
           <!-- define a language-specific format -->
           <java>
             <!-- no need to specify files, inferred automatically, but you can if you want -->
-            <excludes>
-              <exclude>Metrics.java</exclude>
-            </excludes>
             <includes>
               <include>*.java</include>
             </includes>
-            <eclipse>
-              <file>formatter.xml</file>
-            </eclipse>
 
           </java>
         </configuration>

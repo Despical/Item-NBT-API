@@ -1,29 +1,19 @@
 package de.tr7zw.changeme.nbtapi;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.util.ArrayDeque;
-import java.util.Collections;
-import java.util.Deque;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
-import javax.annotation.Nonnull;
-
-import org.bukkit.block.BlockState;
-import org.bukkit.entity.Entity;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
 import de.tr7zw.changeme.nbtapi.utils.GsonWrapper;
 import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ClassWrapper;
 import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ObjectCreator;
 import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionMethod;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.*;
 
 /**
  * Utility class for translating NBTApi calls to reflections into NMS code All
@@ -58,20 +48,6 @@ public class NBTReflectionUtil {
      */
     private NBTReflectionUtil() {
 
-    }
-
-    /**
-     * Gets the NMS Entity for a given Bukkit Entity
-     * 
-     * @param entity Bukkit Entity
-     * @return NMS Entity
-     */
-    public static Object getNMSEntity(Entity entity) {
-        try {
-            return ReflectionMethod.CRAFT_ENTITY_GET_HANDLE.run(ClassWrapper.CRAFT_ENTITY.getClazz().cast(entity));
-        } catch (Exception e) {
-            throw new NbtApiException("Exception while getting the NMS Entity from a Bukkit Entity!", e);
-        }
     }
 
     /**
@@ -199,106 +175,6 @@ public class NBTReflectionUtil {
             return (Map<String, Object>) field_unhandledTags.get(meta);
         } catch (Exception e) {
             throw new NbtApiException("Exception while getting unhandled tags from ItemMeta!", e);
-        }
-    }
-
-    /**
-     * Gets the Vanilla NBT Compound from a given NMS Entity
-     * 
-     * @param nmsEntity
-     * @return NMS NBT Compound
-     */
-    public static Object getEntityNBTTagCompound(Object nmsEntity) {
-        try {
-            Object nbt = ClassWrapper.NMS_NBTTAGCOMPOUND.getClazz().newInstance();
-            Object answer = ReflectionMethod.NMS_ENTITY_GET_NBT.run(nmsEntity, nbt);
-            if (answer == null)
-                answer = nbt;
-            return answer;
-        } catch (Exception e) {
-            throw new NbtApiException("Exception while getting NBTCompound from NMS Entity!", e);
-        }
-    }
-
-    /**
-     * Loads all Vanilla tags from a NMS Compound into a NMS Entity
-     * 
-     * @param nbtTag
-     * @param nmsEntity
-     * @return The NMS Entity
-     */
-    public static Object setEntityNBTTag(Object nbtTag, Object nmsEntity) {
-        try {
-            ReflectionMethod.NMS_ENTITY_SET_NBT.run(nmsEntity, nbtTag);
-            return nmsEntity;
-        } catch (Exception ex) {
-            throw new NbtApiException("Exception while setting the NBTCompound of an Entity", ex);
-        }
-    }
-
-    /**
-     * Gets the NMS Compound from a given TileEntity
-     * 
-     * @param tile
-     * @return NMS Compound with the Vanilla data
-     */
-    public static Object getTileEntityNBTTagCompound(BlockState tile) {
-        try {
-            Object cworld = ClassWrapper.CRAFT_WORLD.getClazz().cast(tile.getWorld());
-            Object nmsworld = ReflectionMethod.CRAFT_WORLD_GET_HANDLE.run(cworld);
-            Object o = null;
-            if (MinecraftVersion.getVersion() == MinecraftVersion.MC1_7_R4) {
-                o = ReflectionMethod.NMS_WORLD_GET_TILEENTITY_1_7_10.run(nmsworld, tile.getX(), tile.getY(),
-                        tile.getZ());
-            } else {
-                Object pos = ObjectCreator.NMS_BLOCKPOSITION.getInstance(tile.getX(), tile.getY(), tile.getZ());
-                o = ReflectionMethod.NMS_WORLD_GET_TILEENTITY.run(nmsworld, pos);
-            }
-
-            Object answer = null;
-            if (MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_18_R1)) {
-                answer = ReflectionMethod.TILEENTITY_GET_NBT_1181.run(o);
-            } else {
-                answer = ClassWrapper.NMS_NBTTAGCOMPOUND.getClazz().newInstance();
-                ReflectionMethod.TILEENTITY_GET_NBT.run(o, answer);
-            }
-            if (answer == null) {
-                throw new NbtApiException("Unable to get NBTCompound from TileEntity! " + tile + " " + o);
-            }
-            return answer;
-        } catch (Exception e) {
-            throw new NbtApiException("Exception while getting NBTCompound from TileEntity!", e);
-        }
-    }
-
-    /**
-     * Sets Vanilla tags from a NMS Compound to a TileEntity
-     * 
-     * @param tile
-     * @param comp
-     */
-    public static void setTileEntityNBTTagCompound(BlockState tile, Object comp) {
-        try {
-            Object cworld = ClassWrapper.CRAFT_WORLD.getClazz().cast(tile.getWorld());
-            Object nmsworld = ReflectionMethod.CRAFT_WORLD_GET_HANDLE.run(cworld);
-            Object o = null;
-            if (MinecraftVersion.getVersion() == MinecraftVersion.MC1_7_R4) {
-                o = ReflectionMethod.NMS_WORLD_GET_TILEENTITY_1_7_10.run(nmsworld, tile.getX(), tile.getY(),
-                        tile.getZ());
-            } else {
-                Object pos = ObjectCreator.NMS_BLOCKPOSITION.getInstance(tile.getX(), tile.getY(), tile.getZ());
-                o = ReflectionMethod.NMS_WORLD_GET_TILEENTITY.run(nmsworld, pos);
-            }
-            if (MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_17_R1)) {
-                ReflectionMethod.TILEENTITY_SET_NBT.run(o, comp);
-            } else if (MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_16_R1)) {
-                Object blockData = ReflectionMethod.TILEENTITY_GET_BLOCKDATA.run(o);
-                ReflectionMethod.TILEENTITY_SET_NBT_LEGACY1161.run(o, blockData, comp);
-            } else {
-                ReflectionMethod.TILEENTITY_SET_NBT_LEGACY1151.run(o, comp);
-            }
-        } catch (Exception e) {
-            throw new NbtApiException("Exception while setting NBTData for a TileEntity!", e);
         }
     }
 

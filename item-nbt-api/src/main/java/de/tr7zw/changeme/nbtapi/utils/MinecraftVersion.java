@@ -1,11 +1,8 @@
 package de.tr7zw.changeme.nbtapi.utils;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.logging.Logger;
 
 /**
  * This class acts as the "Brain" of the NBTApi. It contains the main logger for
@@ -25,18 +22,10 @@ public enum MinecraftVersion {
 
     private static MinecraftVersion version;
     private static Boolean hasGsonSupport;
-    private static Boolean isForgePresent;
-    private static Boolean isFoliaPresent;
-    private static boolean bStatsDisabled = false;
-    private static boolean disablePackageWarning = false;
-    private static boolean updateCheckDisabled = true;
     /**
      * Logger used by the api
      */
     private static Logger logger = Logger.getLogger("NBTAPI");
-
-    // NBT-API Version
-    protected static final String VERSION = "2.12.0";
 
     private final int versionId;
     private final boolean mojangMapping;
@@ -117,84 +106,7 @@ public enum MinecraftVersion {
             version = MinecraftVersion.UNKNOWN;
         }
 
-        init();
         return version;
-    }
-
-    public static String getNBTAPIVersion() {
-        return VERSION;
-    }
-
-    private static void init() {
-        try {
-            if (hasGsonSupport() && !bStatsDisabled) {
-                Plugin plugin = Bukkit.getPluginManager().getPlugin(VersionChecker.getPlugin());
-                if (plugin instanceof JavaPlugin) {
-                    getLogger()
-                            .info("[NBTAPI] Using the plugin '" + plugin.getName() + "' to create a bStats instance!");
-                    new Metrics((JavaPlugin) plugin, 1058);
-                } else if (plugin == null) {
-                    getLogger().info("[NBTAPI] Unable to create a bStats instance!!");
-                }
-            }
-        } catch (Exception ex) {
-            logger.log(Level.WARNING, "[NBTAPI] Error enabling Metrics!", ex);
-        }
-
-        if (hasGsonSupport() && !updateCheckDisabled)
-            new Thread(() -> {
-                try {
-                    VersionChecker.checkForUpdates();
-                } catch (Exception ex) {
-                    logger.log(Level.WARNING, "[NBTAPI] Error while checking for updates! Error: " + ex.getMessage());
-                }
-            }).start();
-        // Maven's Relocate is clever and changes strings, too. So we have to use this
-        // little "trick" ... :D (from bStats)
-        final String defaultPackage = new String(new byte[] { 'd', 'e', '.', 't', 'r', '7', 'z', 'w', '.', 'c', 'h',
-                'a', 'n', 'g', 'e', 'm', 'e', '.', 'n', 'b', 't', 'a', 'p', 'i', '.', 'u', 't', 'i', 'l', 's' });
-        final String reservedPackage = new String(new byte[] { 'd', 'e', '.', 't', 'r', '7', 'z', 'w', '.', 'n', 'b',
-                't', 'a', 'p', 'i', '.', 'u', 't', 'i', 'l', 's' });
-        if (!disablePackageWarning && MinecraftVersion.class.getPackage().getName().equals(defaultPackage)) {
-            logger.warning(
-                    "#########################################- NBTAPI -#########################################");
-            logger.warning(
-                    "The NBT-API package has not been moved! This *will* cause problems with other plugins containing");
-            logger.warning(
-                    "a different version of the api! Please read the guide on the plugin page on how to get the");
-            logger.warning(
-                    "Maven Shade plugin to relocate the api to your personal location! If you are not the developer,");
-            logger.warning("please check your plugins and contact their developer, so they can fix this issue.");
-            logger.warning(
-                    "#########################################- NBTAPI -#########################################");
-        }
-        if (!disablePackageWarning && !"NBTAPI".equals(VersionChecker.getPlugin())) { // we are not the nbtapi, check
-                                                                                      // for common shading errors
-            if (!"de.tr7zw.nbtapi.utils".equals(reservedPackage)) {
-                logger.warning(
-                        "#########################################- NBTAPI -#########################################");
-                logger.warning(
-                        "The NBT-API inside " + VersionChecker.getPlugin() + " is the plugin version, not the API!");
-                logger.warning(
-                        "The plugin itself should never be shaded! Remove the `-plugin` from the dependency and fix your shading setup.");
-                logger.warning(
-                        "For more info check: https://github.com/tr7zw/Item-NBT-API/wiki/Using-Maven#option-2-shading-the-nbt-api-into-your-plugin");
-                logger.warning(
-                        "#########################################- NBTAPI -#########################################");
-                return; // don't also print the second error
-            }
-            if (MinecraftVersion.class.getPackage().getName().equals("de.tr7zw.nbtapi.utils")) {
-                logger.warning(
-                        "#########################################- NBTAPI -#########################################");
-                logger.warning(
-                        "The NBT-API inside " + VersionChecker.getPlugin() + " is located at 'de.tr7zw.nbtapi.utils'!");
-                logger.warning(
-                        "This package name is reserved for the official NBTAPI plugin, and not intended to be used for shading!");
-                logger.warning("Please change the relocate to something else. For example: com.example.util.nbtapi");
-                logger.warning(
-                        "#########################################- NBTAPI -#########################################");
-            }
-        }
     }
 
     /**
@@ -214,89 +126,9 @@ public enum MinecraftVersion {
     }
 
     /**
-     * @return True, if Forge is present
-     */
-    public static boolean isForgePresent() {
-        if (isForgePresent != null) {
-            return isForgePresent;
-        }
-        try {
-            isForgePresent = true;
-        } catch (Exception ex) {
-            isForgePresent = false;
-        }
-
-        return true;
-    }
-
-    /**
-     * @return True, if Folia is present
-     */
-    public static boolean isFoliaPresent() {
-        if (isFoliaPresent != null) {
-            return isFoliaPresent;
-        }
-        try {
-            logger.info("[NBTAPI] Found Folia: "
-                    + Class.forName("io.papermc.paper.threadedregions.RegionizedServer"));
-            isFoliaPresent = true;
-        } catch (Exception ex) {
-            isFoliaPresent = false;
-        }
-        return isFoliaPresent;
-    }
-
-    /**
-     * Calling this function before the NBT-Api is used will disable bStats stats
-     * collection. Please consider not to do that, since it won't affect your plugin
-     * and helps the NBT-Api developer to see api's demand.
-     */
-    public static void disableBStats() {
-        bStatsDisabled = true;
-    }
-
-    /**
-     * Disables the update check. Uses Spiget to get the current version and prints
-     * a warning when outdated.
-     */
-    public static void disableUpdateCheck() {
-        updateCheckDisabled = true;
-    }
-
-    /**
-     * Enables the update check. Uses Spiget to get the current version and prints a
-     * warning when outdated.
-     */
-    public static void enableUpdateCheck() {
-        updateCheckDisabled = false;
-    }
-
-    /**
-     * Forcefully disables the log message for plugins not shading the API to
-     * another location. This may be helpful for networks or development
-     * environments, but please don't use it for plugins that are uploaded to
-     * Spigotmc.
-     */
-    public static void disablePackageWarning() {
-        disablePackageWarning = true;
-    }
-
-    /**
      * @return Logger used by the NBT-API
      */
     public static Logger getLogger() {
         return logger;
     }
-
-    /**
-     * Replaces the NBT-API logger with a custom implementation.
-     * 
-     * @param logger The new logger(can not be null!)
-     */
-    public static void replaceLogger(Logger logger) {
-        if (logger == null)
-            throw new NullPointerException("Logger can not be null!");
-        MinecraftVersion.logger = logger;
-    }
-
 }

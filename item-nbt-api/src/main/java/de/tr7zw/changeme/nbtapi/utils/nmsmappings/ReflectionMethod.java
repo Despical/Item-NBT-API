@@ -295,11 +295,8 @@ public enum ReflectionMethod {
             MinecraftVersion removedAfter, Since... methodnames) {
         this.removedAfter = removedAfter;
         this.parentClassWrapper = targetClass;
-        // Special Case for Modded 1.7.10
-        boolean specialCase = (MinecraftVersion.isForgePresent() && this.name().equals("COMPOUND_MERGE")
-                && MinecraftVersion.getVersion() == MinecraftVersion.MC1_7_R4); // COMPOUND_MERGE is only present on
-                                                                                // Crucible, not on vanilla 1.7.10
-        if (!specialCase && (!MinecraftVersion.isAtLeastVersion(addedSince)
+
+        if ((!MinecraftVersion.isAtLeastVersion(addedSince)
                 || (this.removedAfter != null && MinecraftVersion.isNewerThan(removedAfter))))
             return;
         compatible = true;
@@ -313,9 +310,7 @@ public enum ReflectionMethod {
         targetVersion = target;
         String targetMethodName = targetVersion.name;
         try {
-            if (MinecraftVersion.isForgePresent() && MinecraftVersion.getVersion() == MinecraftVersion.MC1_7_R4) {
-                targetMethodName = Forge1710Mappings.getMethodMapping().getOrDefault(this.name(), targetMethodName);
-            } else if (targetVersion.version.isMojangMapping()) {
+            if (targetVersion.version.isMojangMapping()) {
                 try {
                     // check for mojang mapped method
                     String name = targetVersion.name.split("\\(")[0];

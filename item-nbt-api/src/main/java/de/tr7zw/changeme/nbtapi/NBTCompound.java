@@ -20,7 +20,6 @@ import de.tr7zw.changeme.nbtapi.utils.CheckUtil;
 import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 import de.tr7zw.changeme.nbtapi.utils.PathUtil;
 import de.tr7zw.changeme.nbtapi.utils.PathUtil.PathSegment;
-import de.tr7zw.changeme.nbtapi.utils.nmsmappings.Forge1710Mappings;
 import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionMethod;
 
 /**
@@ -30,14 +29,15 @@ import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionMethod;
  * @author tr7zw
  *
  */
+@SuppressWarnings("javadoc")
 public class NBTCompound implements ReadWriteNBT {
 
     private final ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
     private final Lock readLock = readWriteLock.readLock();
     private final Lock writeLock = readWriteLock.writeLock();
 
-    private String compundName;
-    private NBTCompound parent;
+    private final String compundName;
+    private final NBTCompound parent;
     private final boolean readOnly;
     private Object readOnlyCache;
 
@@ -70,12 +70,6 @@ public class NBTCompound implements ReadWriteNBT {
         }
         if (readOnly) {
             this.readOnlyCache = object;
-        }
-    }
-
-    protected void setClosed() {
-        if (parent != null) {
-            parent.setClosed();
         }
     }
 
@@ -165,7 +159,7 @@ public class NBTCompound implements ReadWriteNBT {
 
     /**
      * Setter
-     * 
+     *
      * @param key
      * @param value
      */
@@ -462,7 +456,6 @@ public class NBTCompound implements ReadWriteNBT {
 
     /**
      * Setter
-     * 
      * Requires at least 1.16
      * 
      * @param key
@@ -482,7 +475,6 @@ public class NBTCompound implements ReadWriteNBT {
 
     /**
      * Getter
-     * 
      * Requires at least 1.16
      * 
      * @param key
@@ -973,19 +965,19 @@ public class NBTCompound implements ReadWriteNBT {
             return defaultValue;
 
         Class<?> clazz = defaultValue.getClass();
-        if (clazz == Boolean.class || clazz == boolean.class)
+        if (clazz == Boolean.class)
             return (T) getBoolean(key);
-        if (clazz == Byte.class || clazz == byte.class)
+        if (clazz == Byte.class)
             return (T) getByte(key);
-        if (clazz == Short.class || clazz == short.class)
+        if (clazz == Short.class)
             return (T) getShort(key);
-        if (clazz == Integer.class || clazz == int.class)
+        if (clazz == Integer.class)
             return (T) getInteger(key);
-        if (clazz == Long.class || clazz == long.class)
+        if (clazz == Long.class)
             return (T) getLong(key);
-        if (clazz == Float.class || clazz == float.class)
+        if (clazz == Float.class)
             return (T) getFloat(key);
-        if (clazz == Double.class || clazz == double.class)
+        if (clazz == Double.class)
             return (T) getDouble(key);
         if (clazz == byte[].class)
             return (T) getByteArray(key);
@@ -1242,8 +1234,7 @@ public class NBTCompound implements ReadWriteNBT {
     public ReadWriteNBT resolveCompound(String key) {
         List<PathSegment> keys = PathUtil.splitPath(key);
         NBTCompound tag = this;
-        for (int i = 0; i < keys.size(); i++) {
-            PathSegment segment = keys.get(i);
+        for (PathSegment segment : keys) {
             if (!segment.hasIndex()) {
                 tag = tag.getCompound(segment.getPath());
                 if (tag == null) {
@@ -1268,8 +1259,7 @@ public class NBTCompound implements ReadWriteNBT {
     public ReadWriteNBT resolveOrCreateCompound(String key) {
         List<PathSegment> keys = PathUtil.splitPath(key);
         NBTCompound tag = this;
-        for (int i = 0; i < keys.size(); i++) {
-            PathSegment segment = keys.get(i);
+        for (PathSegment segment : keys) {
             if (!segment.hasIndex()) {
                 tag = tag.getOrCreateCompound(segment.getPath());
                 if (tag == null) {
@@ -1422,11 +1412,8 @@ public class NBTCompound implements ReadWriteNBT {
             Object comp = getResolvedObject();
             if (comp == null)
                 return "{}";
-            if (MinecraftVersion.isForgePresent() && MinecraftVersion.getVersion() == MinecraftVersion.MC1_7_R4) {
-                return Forge1710Mappings.toString(comp);
-            } else {
-                return comp.toString();
-            }
+
+            return comp.toString();
         } finally {
             readLock.unlock();
         }

@@ -141,11 +141,6 @@ public class NBTItem extends NBTCompound implements ReadWriteItemNBT {
     }
 
     @Override
-    protected void setClosed() {
-        this.closed = true;
-    }
-
-    @Override
     protected boolean isClosed() {
         return closed;
     }

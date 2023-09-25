@@ -175,50 +175,50 @@ public interface ReadableNBT {
     Set<String> getKeys();
 
     /**
-     * @param name
+
      * @return The Compound instance or null
      */
     @Nullable
     ReadableNBT getCompound(String name);
 
     /**
-     * @param name
+
      * @return The retrieved String List
      */
     ReadableNBTList<String> getStringList(String name);
 
     /**
-     * @param name
+
      * @return The retrieved Integer List
      */
     ReadableNBTList<Integer> getIntegerList(String name);
 
     /**
-     * @param name
+
      * @return The retrieved Integer List
      */
     ReadableNBTList<int[]> getIntArrayList(String name);
 
     /**
-     * @param name
+
      * @return The retrieved Integer List
      */
     ReadableNBTList<UUID> getUUIDList(String name);
 
     /**
-     * @param name
+
      * @return The retrieved Float List
      */
     ReadableNBTList<Float> getFloatList(String name);
 
     /**
-     * @param name
+
      * @return The retrieved Double List
      */
     ReadableNBTList<Double> getDoubleList(String name);
 
     /**
-     * @param name
+
      * @return The retrieved Long List
      */
     ReadableNBTList<Long> getLongList(String name);
@@ -226,14 +226,14 @@ public interface ReadableNBT {
     /**
      * Returns the type of the list, null if not a list
      * 
-     * @param name
+
      * @return
      */
     @Nullable
     NBTType getListType(String name);
 
     /**
-     * @param name
+
      * @return The retrieved Compound List
      */
     ReadableNBTList<ReadWriteNBT> getCompoundList(String name);
@@ -311,36 +311,24 @@ public interface ReadableNBT {
 
     /**
      * Get the object at the specified key via the handler.
-     * 
-     * @param <T>
-     * @param key
-     * @param handler
-     * @return
      */
     <T> T get(String key, NBTHandler<T> handler);
 
     /**
      * Get an Enum value that has been set via setEnum or setString(key,
      * value.name()). Passing null/invalid keys will return null.
-     * 
-     * @param <E>
-     * @param key
-     * @param type
-     * @return
      */
     @Nullable
     <E extends Enum<E>> E getEnum(String key, Class<E> type);
 
     /**
-     * @param name
+
      * @return The type of the given stored key or null
      */
     NBTType getType(String name);
 
     /**
      * Write the content of this Compound into the provided stream.
-     * 
-     * @param stream
      */
     void writeCompound(OutputStream stream);
 
