@@ -22,9 +22,9 @@ import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionMethod;
  */
 public abstract class NBTList<T> implements List<T>, ReadWriteNBTList<T> {
 
-    private String listName;
-    private NBTCompound parent;
-    private NBTType type;
+    private final String listName;
+    private final NBTCompound parent;
+    private final NBTType type;
     protected Object listObject;
 
     protected NBTList(NBTCompound owner, String name, NBTType type, Object list) {
@@ -304,7 +304,7 @@ public abstract class NBTList<T> implements List<T>, ReadWriteNBTList<T> {
         try {
             parent.getWriteLock().lock();
             int size = size();
-            int id = -1;
+            int id;
             while ((id = indexOf(o)) != -1) {
                 remove(id);
             }
