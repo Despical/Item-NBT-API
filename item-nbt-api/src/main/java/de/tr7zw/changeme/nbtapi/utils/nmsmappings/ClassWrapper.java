@@ -12,7 +12,6 @@ import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
  * @author tr7zw
  *
  */
-@SuppressWarnings("javadoc")
 public enum ClassWrapper {
     CRAFT_ITEMSTACK(PackageWrapper.CRAFTBUKKIT, "inventory.CraftItemStack", null, null),
     CRAFT_METAITEM(PackageWrapper.CRAFTBUKKIT, "inventory.CraftMetaItem", null, null),
@@ -50,12 +49,9 @@ public enum ClassWrapper {
     NMS_WORLD(PackageWrapper.NMS, "World", null, null, "net.minecraft.world.level", "net.minecraft.world.level.Level"),
     NMS_ENTITY(PackageWrapper.NMS, "Entity", null, null, "net.minecraft.world.entity",
             "net.minecraft.world.entity.Entity"),
-    NMS_ENTITYTYPES(PackageWrapper.NMS, "EntityTypes", null, null, "net.minecraft.world.entity",
-            "net.minecraft.world.entity.EntityType"),
     NMS_REGISTRYSIMPLE(PackageWrapper.NMS, "RegistrySimple", MinecraftVersion.MC1_11_R1, MinecraftVersion.MC1_12_R1),
     NMS_REGISTRYMATERIALS(PackageWrapper.NMS, "RegistryMaterials", null, null, "net.minecraft.core",
             "net.minecraft.core.MappedRegistry"),
-    NMS_IREGISTRY(PackageWrapper.NMS, "IRegistry", null, null, "net.minecraft.core", "net.minecraft.core.Registry"),
     NMS_MINECRAFTKEY(PackageWrapper.NMS, "MinecraftKey", MinecraftVersion.MC1_8_R3, null, "net.minecraft.resources",
             "net.minecraft.resources.ResourceKey"),
     NMS_GAMEPROFILESERIALIZER(PackageWrapper.NMS, "GameProfileSerializer", null, null, "net.minecraft.nbt",

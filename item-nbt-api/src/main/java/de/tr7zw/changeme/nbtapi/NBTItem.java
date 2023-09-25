@@ -22,6 +22,7 @@ import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionMethod;
  * @author tr7zw
  *
  */
+@SuppressWarnings("javadoc")
 public class NBTItem extends NBTCompound implements ReadWriteItemNBT {
 
     private ItemStack bukkitItem;
@@ -77,7 +78,6 @@ public class NBTItem extends NBTCompound implements ReadWriteItemNBT {
      * @param item
      * @param directApply
      */
-    @Deprecated
     public NBTItem(ItemStack item, boolean directApply) {
         super(null, null);
         if (item == null || item.getType() == Material.AIR || item.getAmount() <= 0) {
@@ -353,7 +353,6 @@ public class NBTItem extends NBTCompound implements ReadWriteItemNBT {
      * Helper method to do the inverse of "convertItemArraytoNBT". Creates an
      * {@link ItemStack}[] using the {@link NBTCompound}. This is a custom
      * implementation and won't work with vanilla code (Shulker content, etc.).
-     * 
      * Will return null for invalid data. Empty slots in the array are filled with
      * AIR Stacks!
      * 
