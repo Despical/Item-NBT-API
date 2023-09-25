@@ -1,3 +1,6 @@
+# New Fork
+This forks only involves NBT usage for items to reduce shaded JAR size and only used in Despical's [InventoryFramework](https:://www.github.com/Despical/InventoryFramework) library.
+
 # Item-NBT-API
 
 Add custom NBT tags to Items/Tiles/Entities without NMS! Modify NBT and store it Files, other NBT or as String in yaml/json/SQL/Redis.
