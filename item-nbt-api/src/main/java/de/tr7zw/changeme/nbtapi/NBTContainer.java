@@ -81,7 +81,6 @@ public class NBTContainer extends NBTCompound {
         nbt = tag;
     }
 
-    @Override
     protected void setClosed() {
         this.closed = true;
     }
