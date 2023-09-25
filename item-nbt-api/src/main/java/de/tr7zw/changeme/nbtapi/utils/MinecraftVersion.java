@@ -108,20 +108,15 @@ public enum MinecraftVersion {
         if (version != null) {
             return version;
         }
+
         final String ver = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-        logger.info("[NBTAPI] Found Spigot: " + ver + "! Trying to find NMS support");
+
         try {
             version = MinecraftVersion.valueOf(ver.replace("v", "MC"));
         } catch (IllegalArgumentException ex) {
             version = MinecraftVersion.UNKNOWN;
         }
-        if (version != UNKNOWN) {
-            logger.info("[NBTAPI] NMS support '" + version.name() + "' loaded!");
-        } else {
-            logger.warning("[NBTAPI] This Server-Version(" + ver + ") is not supported by this NBT-API Version("
-                    + VERSION + ") located in " + VersionChecker.getPlugin()
-                    + ". The NBT-API will try to work as good as it can! Some functions may not work!");
-        }
+
         init();
         return version;
     }
@@ -134,7 +129,7 @@ public enum MinecraftVersion {
         try {
             if (hasGsonSupport() && !bStatsDisabled) {
                 Plugin plugin = Bukkit.getPluginManager().getPlugin(VersionChecker.getPlugin());
-                if (plugin != null && plugin instanceof JavaPlugin) {
+                if (plugin instanceof JavaPlugin) {
                     getLogger()
                             .info("[NBTAPI] Using the plugin '" + plugin.getName() + "' to create a bStats instance!");
                     new Metrics((JavaPlugin) plugin, 1058);
@@ -213,7 +208,6 @@ public enum MinecraftVersion {
             Class.forName("com.google.gson.Gson");
             hasGsonSupport = true;
         } catch (Exception ex) {
-            logger.info("[NBTAPI] Gson not found! This will not allow the usage of some methods!");
             hasGsonSupport = false;
         }
         return hasGsonSupport;
@@ -227,14 +221,12 @@ public enum MinecraftVersion {
             return isForgePresent;
         }
         try {
-            logger.info("[NBTAPI] Found Forge: "
-                    + (getVersion() == MinecraftVersion.MC1_7_R4 ? Class.forName("cpw.mods.fml.common.Loader")
-                            : Class.forName("net.minecraftforge.fml.common.Loader")));
             isForgePresent = true;
         } catch (Exception ex) {
             isForgePresent = false;
         }
-        return isForgePresent;
+
+        return true;
     }
 
     /**

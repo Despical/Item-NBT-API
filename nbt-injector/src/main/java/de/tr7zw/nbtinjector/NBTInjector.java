@@ -58,7 +58,6 @@ public class NBTInjector {
         isInjected = true;
         try {
             ClassPool classPool = ClassPool.getDefault();
-            logger.info("[NBTINJECTOR] Injecting Entity classes...");
             if (MinecraftVersion.getVersion().getVersionId() <= MinecraftVersion.MC1_10_R1.getVersionId()) {
                 InternalInjectors.entity1v10Below(classPool);
             } else if (MinecraftVersion.getVersion().getVersionId() <= MinecraftVersion.MC1_12_R1.getVersionId()) {
@@ -69,7 +68,6 @@ public class NBTInjector {
                 InternalInjectors.entity1v14(classPool);
             }
 
-            logger.info("[NBTINJECTOR] Injecting Tile Entity classes...");
             if (MinecraftVersion.getVersion().getVersionId() <= MinecraftVersion.MC1_10_R1.getVersionId()) {
                 InternalInjectors.tile1v10Below(classPool);
             } else if (MinecraftVersion.getVersion().getVersionId() <= MinecraftVersion.MC1_12_R1.getVersionId()) {

@@ -195,7 +195,6 @@ public class InternalInjectors {
                 try {
                     nmsclass = Class.forName("net.minecraft.server." + version + "." + name);
                 } catch (Exception ignore) {
-                    logger.info("Not found: " + "net.minecraft.server." + version + "." + name);
                     // ignore
                 }
             }
