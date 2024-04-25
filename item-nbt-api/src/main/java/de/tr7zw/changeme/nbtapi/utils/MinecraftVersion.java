@@ -18,7 +18,7 @@ public enum MinecraftVersion {
     MC1_7_R4(174), MC1_8_R3(183), MC1_9_R1(191), MC1_9_R2(192), MC1_10_R1(1101), MC1_11_R1(1111), MC1_12_R1(1121),
     MC1_13_R1(1131), MC1_13_R2(1132), MC1_14_R1(1141), MC1_15_R1(1151), MC1_16_R1(1161), MC1_16_R2(1162),
     MC1_16_R3(1163), MC1_17_R1(1171), MC1_18_R1(1181, true), MC1_18_R2(1182, true), MC1_19_R1(1191, true),
-    MC1_19_R2(1192, true), MC1_19_R3(1193, true), MC1_20_R1(1201, true), MC1_20_R2(1201, true);
+    MC1_19_R2(1192, true), MC1_19_R3(1193, true), MC1_20_R1(1201, true), MC1_20_R2(1202, true), MC1_20_R3(1203, true), MC1_20_R4(1204, true);
 
     private static MinecraftVersion version;
     private static Boolean hasGsonSupport;
@@ -57,7 +57,7 @@ public enum MinecraftVersion {
     /**
      * This method is required to hot-wire the plugin during mappings generation for
      * newer mc versions thanks to md_5 not used mojmap.
-     * 
+     *
      * @return
      */
     public String getPackageName() {
@@ -69,7 +69,7 @@ public enum MinecraftVersion {
 
     /**
      * Returns true if the current versions is at least the given Version
-     * 
+     *
      * @param version The minimum version
      * @return
      */
@@ -79,7 +79,7 @@ public enum MinecraftVersion {
 
     /**
      * Returns true if the current versions newer (not equal) than the given version
-     * 
+     *
      * @param version The minimum version
      * @return
      */
@@ -90,7 +90,7 @@ public enum MinecraftVersion {
     /**
      * Getter for this servers MinecraftVersion. Also init's bStats and checks the
      * shading.
-     * 
+     *
      * @return The enum for the MinecraftVersion this server is running
      */
     public static MinecraftVersion getVersion() {

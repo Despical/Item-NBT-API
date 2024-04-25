@@ -13,8 +13,7 @@ import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
  */
 public class MojangToMapping {
 
-    @SuppressWarnings("serial")
-    private static Map<String, String> MC1_18R1 = new HashMap<String, String>() {
+    private static final Map<String, String> MC1_18R1 = new HashMap<String, String>() {
 
         {
             put("net.minecraft.nbt.CompoundTag#contains(java.lang.String)", "e");
@@ -77,9 +76,7 @@ public class MojangToMapping {
 
     };
 
-    @SuppressWarnings("serial")
-    private static Map<String, String> MC1_18R2 = new HashMap<String, String>() {
-
+    private static final Map<String, String> MC1_18R2 = new HashMap<String, String>() {
         {
             putAll(MC1_18R1);
 
@@ -87,20 +84,15 @@ public class MojangToMapping {
         }
     };
 
-    @SuppressWarnings("serial")
-    private static Map<String, String> MC1_19R1 = new HashMap<String, String>() {
-
+    private static final Map<String, String> MC1_19R1 = new HashMap<String, String>() {
         {
             putAll(MC1_18R2);
 
             put("net.minecraft.world.item.ItemStack#getTag()", "u");
         }
-
     };
 
-    @SuppressWarnings("serial")
-    private static Map<String, String> MC1_19R2 = new HashMap<String, String>() {
-
+    private static final Map<String, String> MC1_19R2 = new HashMap<String, String>() {
         {
             putAll(MC1_19R1);
 
@@ -109,9 +101,7 @@ public class MojangToMapping {
 
     };
 
-    @SuppressWarnings("serial")
-    private static Map<String, String> MC1_20R1 = new HashMap<String, String>() {
-
+    private static final Map<String, String> MC1_20R1 = new HashMap<String, String>() {
         {
             putAll(MC1_19R2);
 
@@ -121,9 +111,7 @@ public class MojangToMapping {
 
     };
     
-    @SuppressWarnings("serial")
-    private static Map<String, String> MC1_20R2 = new HashMap<String, String>() {
-
+    private static final Map<String, String> MC1_20R2 = new HashMap<String, String>() {
         {
             putAll(MC1_20R1);
 
@@ -132,11 +120,47 @@ public class MojangToMapping {
 
     };
 
+    private static final Map<String, String> MC1_20R3 = new HashMap<String, String>() {
+        {
+            putAll(MC1_20R2);
+
+            put("net.minecraft.nbt.NbtIo#readCompressed(java.io.InputStream,net.minecraft.nbt.NbtAccounter)", "a");
+            put("net.minecraft.nbt.NbtAccounter#unlimitedHeap()", "a");
+            put("net.minecraft.world.entity.Entity#getEncodeId()", "bw");
+            put("net.minecraft.world.level.block.entity.BlockEntity#saveWithId()", "p");
+            put("net.minecraft.world.level.block.entity.BlockEntity#getBlockState()", "r");
+        }
+
+    };
+
+    private static final Map<String, String> MC1_20R4 = new HashMap<String, String>() {
+        {
+            putAll(MC1_20R3);
+
+            put("net.minecraft.world.entity.Entity#getEncodeId()", "bC");
+            put("net.minecraft.world.level.block.entity.BlockEntity#getBlockState()", "n");
+            put("net.minecraft.core.component.DataComponents#CUSTOM_DATA", "b");
+            put("net.minecraft.core.component.DataComponentHolder#get(net.minecraft.core.component.DataComponentType)", "a");
+            put("net.minecraft.world.item.component.CustomData#copyTag()", "c");
+            put("net.minecraft.world.item.ItemStack#set(net.minecraft.core.component.DataComponentType,java.lang.Object)", "b");
+            put("net.minecraft.world.item.ItemStack#save(net.minecraft.core.HolderLookup$Provider)", "a");
+            put("net.minecraft.server.MinecraftServer#registryAccess()", "bc");
+            put("net.minecraft.world.item.ItemStack#parseOptional(net.minecraft.core.HolderLookup$Provider,net.minecraft.nbt.CompoundTag)", "a");
+            put("net.minecraft.world.level.block.entity.BlockEntity#saveWithId(net.minecraft.core.HolderLookup$Provider)", "c");
+            put("net.minecraft.world.level.block.entity.BlockEntity#loadWithComponents(net.minecraft.nbt.CompoundTag,net.minecraft.core.HolderLookup$Provider)", "c");
+            put("net.minecraft.util.datafix.DataFixers#getDataFixer()", "a");
+            put("net.minecraft.util.datafix.fixes.References#ITEM_STACK", "t");
+            put("net.minecraft.nbt.NbtOps#INSTANCE", "a");
+        }
+    };
+
     public static Map<String, String> getMapping() {
         switch (MinecraftVersion.getVersion()) {
-        case MC1_20_R2:
-            return MC1_20R2;
-        case MC1_20_R1:
+        case MC1_20_R4:
+            return MC1_20R4;
+        case MC1_20_R3:
+            return MC1_20R3;
+			case MC1_20_R1:
             return MC1_20R1;
         case MC1_19_R2:
             return MC1_19R2;
@@ -147,9 +171,7 @@ public class MojangToMapping {
         case MC1_18_R1:
             return MC1_18R1;
         default:
-            return MC1_20R2;// throw new NbtApiException("This version of the NBTAPI is not compatible with
-                            // this server version!");
+            return MC1_20R2;
         }
     }
-
 }
