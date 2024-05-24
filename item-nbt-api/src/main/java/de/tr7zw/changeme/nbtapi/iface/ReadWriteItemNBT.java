@@ -1,10 +1,11 @@
 package de.tr7zw.changeme.nbtapi.iface;
 
-import de.tr7zw.changeme.nbtapi.NBTItem;
+import java.util.function.BiConsumer;
+
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.function.BiConsumer;
+import de.tr7zw.changeme.nbtapi.NBTItem;
 
 public interface ReadWriteItemNBT extends ReadWriteNBT, ReadableItemNBT {
 

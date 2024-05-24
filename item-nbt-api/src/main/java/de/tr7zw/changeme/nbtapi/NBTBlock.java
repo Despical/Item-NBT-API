@@ -1,7 +1,8 @@
 package de.tr7zw.changeme.nbtapi;
 
-import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 import org.bukkit.block.Block;
+
+import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 
 /**
  * Helper class to store NBT data to Block Locations. Use getData() to get the

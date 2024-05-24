@@ -1,5 +1,23 @@
 package de.tr7zw.changeme.nbtapi;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.ArrayDeque;
+import java.util.Collections;
+import java.util.Deque;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
+import org.bukkit.Bukkit;
+import org.bukkit.block.BlockState;
+import org.bukkit.entity.Entity;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
 import de.tr7zw.changeme.nbtapi.utils.DataFixerUtil;
 import de.tr7zw.changeme.nbtapi.utils.GsonWrapper;
 import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
@@ -7,18 +25,6 @@ import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ClassWrapper;
 import de.tr7zw.changeme.nbtapi.utils.nmsmappings.MojangToMapping;
 import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ObjectCreator;
 import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionMethod;
-import org.bukkit.Bukkit;
-import org.bukkit.block.BlockState;
-import org.bukkit.entity.Entity;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Serializable;
-import java.lang.reflect.Field;
-import java.util.*;
 
 /**
  * Utility class for translating NBTApi calls to reflections into NMS code All
@@ -207,8 +213,9 @@ public class NBTReflectionUtil {
         try {
             Object nmsComp = getToCompount(nbtcompound.getCompound(), nbtcompound);
             if (MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_20_R4)) {
-                if(nbtcompound.hasTag("tag")) {
-                    nmsComp = DataFixerUtil.fixUpRawItemData(nmsComp, DataFixerUtil.VERSION1_20_4, DataFixerUtil.VERSION1_20_5);
+                if (nbtcompound.hasTag("tag")) {
+                    nmsComp = DataFixerUtil.fixUpRawItemData(nmsComp, DataFixerUtil.VERSION1_20_4,
+                            DataFixerUtil.getCurrentVersion());
                 }
                 return ReflectionMethod.NMSITEM_LOAD.run(null, registry_access, nmsComp);
             } else if (MinecraftVersion.getVersion().getVersionId() >= MinecraftVersion.MC1_11_R1.getVersionId()) {
@@ -308,6 +315,11 @@ public class NBTReflectionUtil {
             } else {
                 Object pos = ObjectCreator.NMS_BLOCKPOSITION.getInstance(tile.getX(), tile.getY(), tile.getZ());
                 o = ReflectionMethod.NMS_WORLD_GET_TILEENTITY.run(nmsworld, pos);
+            }
+
+            if (o == null) {
+                throw new NbtApiException("The passed BlockState(" + tile.getType()
+                        + ") doesn't point to a BlockEntity. Only BlockEntities like Chest/Signs/Furnance/etc have NBT.");
             }
 
             Object answer = null;

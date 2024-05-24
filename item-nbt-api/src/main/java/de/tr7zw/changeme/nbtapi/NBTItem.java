@@ -1,18 +1,20 @@
 package de.tr7zw.changeme.nbtapi;
 
+import java.util.Set;
+import java.util.function.BiConsumer;
+
+import javax.annotation.Nullable;
+
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
 import de.tr7zw.changeme.nbtapi.iface.ReadWriteItemNBT;
 import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
 import de.tr7zw.changeme.nbtapi.iface.ReadableNBT;
 import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ClassWrapper;
 import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionMethod;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-
-import javax.annotation.Nullable;
-import java.util.Set;
-import java.util.function.BiConsumer;
 
 /**
  * NBT class to access vanilla/custom tags on ItemStacks. This class doesn't
@@ -31,10 +33,13 @@ public class NBTItem extends NBTCompound implements ReadWriteItemNBT {
     private boolean closed = false;
 
     /**
-     * Constructor for NBTItems. The ItemStack will be cloned!
+     * Constructor for NBTItems. The ItemStack will be cloned! Deprecated: Please
+     * use the NBT class to work with items. It's up to 400% faster and provides
+     * less ways to mess up code.
      * 
      * @param item
      */
+    @Deprecated
     public NBTItem(ItemStack item) {
         this(item, false);
     }
@@ -214,7 +219,7 @@ public class NBTItem extends NBTCompound implements ReadWriteItemNBT {
         if (item == null || item.getType() == Material.AIR) {
             throw new NullPointerException("ItemStack can't be null/Air!");
         }
-        if(MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_20_R4)) {
+        if (MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_20_R4)) {
             // 1.20.5+ doesn't have any vanilla tags
             NBT.modify(item, nbt -> {
                 nbt.mergeCompound(this);
@@ -234,7 +239,7 @@ public class NBTItem extends NBTCompound implements ReadWriteItemNBT {
      */
     @Deprecated
     public boolean hasCustomNbtData() {
-        if(MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_20_R4)) {
+        if (MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_20_R4)) {
             // 1.20.5+ doesn't have any vanilla tags
             return hasNBTData();
         }
@@ -249,7 +254,7 @@ public class NBTItem extends NBTCompound implements ReadWriteItemNBT {
     @Deprecated
     public void clearCustomNBT() {
         finalizeChanges();
-        if(MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_20_R4)) {
+        if (MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_20_R4)) {
             // 1.20.5+ doesn't have any vanilla tags
             setCompound(null);
             return;
@@ -298,8 +303,9 @@ public class NBTItem extends NBTCompound implements ReadWriteItemNBT {
         bukkitItem.setItemMeta(meta);
         updateCachedCompound();
         if (directApply) {
-            if(MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_20_R4)) {
-                throw new NbtApiException("Direct apply mode meta changes don't work anymore in 1.20.5+. Please switch to the modern NBT.modify sytnax!");
+            if (MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_20_R4)) {
+                throw new NbtApiException(
+                        "Direct apply mode meta changes don't work anymore in 1.20.5+. Please switch to the modern NBT.modify sytnax!");
             }
             applyNBT(originalSrcStack);
         }

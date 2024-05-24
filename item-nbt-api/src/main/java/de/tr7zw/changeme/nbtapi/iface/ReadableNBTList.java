@@ -1,10 +1,10 @@
 package de.tr7zw.changeme.nbtapi.iface;
 
-import de.tr7zw.changeme.nbtapi.NBTType;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import de.tr7zw.changeme.nbtapi.NBTType;
 
 public interface ReadableNBTList<T> extends Iterable<T> {
 

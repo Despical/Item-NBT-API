@@ -1,10 +1,9 @@
 package de.tr7zw.changeme.nbtapi.utils;
 
-import org.bukkit.Bukkit;
-
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
+
+import org.bukkit.Bukkit;
 
 /**
  * This class acts as the "Brain" of the NBTApi. It contains the main logger for
@@ -23,29 +22,22 @@ public enum MinecraftVersion {
 
     private static MinecraftVersion version;
     private static Boolean hasGsonSupport;
-    private static Boolean isForgePresent;
-    /**
-     * Logger used by the api
-     */
-    private static Logger logger = Logger.getLogger("NBTAPI");
-
-    // NBT-API Version
-    private static final String VERSION = "2.12.4-SNAPSHOT";
 
     private final int versionId;
     private final boolean mojangMapping;
 
     // TODO: not nice
     private static final Map<String, MinecraftVersion> VERSION_TO_REVISION = new HashMap<String, MinecraftVersion>() {
-        { 
-            this.put("1.20", MC1_20_R1);
-            this.put("1.20.1",  MC1_20_R1);
-            this.put("1.20.2", MC1_20_R2);
-            this.put("1.20.3", MC1_20_R3);
-            this.put("1.20.4", MC1_20_R3);
-            this.put("1.20.5", MC1_20_R4);
-        }
-    };
+		{
+			this.put("1.20", MC1_20_R1);
+			this.put("1.20.1", MC1_20_R1);
+			this.put("1.20.2", MC1_20_R2);
+			this.put("1.20.3", MC1_20_R3);
+			this.put("1.20.4", MC1_20_R3);
+			this.put("1.20.5", MC1_20_R4);
+			this.put("1.20.6", MC1_20_R4);
+		}
+	};
 
     MinecraftVersion(int versionId) {
         this(versionId, false);
@@ -124,7 +116,7 @@ public enum MinecraftVersion {
     }
 
     public static String getNBTAPIVersion() {
-        return VERSION;
+        return "1.0.3";
     }
 
     /**
@@ -138,45 +130,8 @@ public enum MinecraftVersion {
             Class.forName("com.google.gson.Gson");
             hasGsonSupport = true;
         } catch (Exception ex) {
-            logger.info("[NBTAPI] Gson not found! This will not allow the usage of some methods!");
             hasGsonSupport = false;
         }
         return hasGsonSupport;
-    }
-
-    /**
-     * @return True, if Forge is present
-     */
-    public static boolean isForgePresent() {
-        if (isForgePresent != null) {
-            return isForgePresent;
-        }
-        try {
-            logger.info("[NBTAPI] Found Forge: "
-                    + (getVersion() == MinecraftVersion.MC1_7_R4 ? Class.forName("cpw.mods.fml.common.Loader")
-                            : Class.forName("net.minecraftforge.fml.common.Loader")));
-            isForgePresent = true;
-        } catch (Exception ex) {
-            isForgePresent = false;
-        }
-        return isForgePresent;
-    }
-
-    /**
-     * @return Logger used by the NBT-API
-     */
-    public static Logger getLogger() {
-        return logger;
-    }
-
-    /**
-     * Replaces the NBT-API logger with a custom implementation.
-     * 
-     * @param logger The new logger(can not be null!)
-     */
-    public static void replaceLogger(Logger logger) {
-        if (logger == null)
-            throw new NullPointerException("Logger can not be null!");
-        MinecraftVersion.logger = logger;
     }
 }

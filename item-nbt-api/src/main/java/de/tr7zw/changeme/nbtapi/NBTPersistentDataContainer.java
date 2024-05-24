@@ -1,9 +1,10 @@
 package de.tr7zw.changeme.nbtapi;
 
-import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionMethod;
+import java.util.Map;
+
 import org.bukkit.persistence.PersistentDataContainer;
 
-import java.util.Map;
+import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionMethod;
 
 public class NBTPersistentDataContainer extends NBTCompound {
 

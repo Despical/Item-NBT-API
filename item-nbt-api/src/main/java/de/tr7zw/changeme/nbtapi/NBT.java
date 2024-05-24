@@ -1,16 +1,23 @@
 package de.tr7zw.changeme.nbtapi;
 
-import com.mojang.authlib.GameProfile;
-import de.tr7zw.changeme.nbtapi.iface.*;
-import de.tr7zw.changeme.nbtapi.wrapper.NBTProxy;
-import de.tr7zw.changeme.nbtapi.wrapper.ProxyBuilder;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
+import javax.annotation.Nullable;
+
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nullable;
-import java.util.function.Consumer;
-import java.util.function.Function;
+import com.mojang.authlib.GameProfile;
+
+import de.tr7zw.changeme.nbtapi.iface.ReadWriteItemNBT;
+import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
+import de.tr7zw.changeme.nbtapi.iface.ReadableItemNBT;
+import de.tr7zw.changeme.nbtapi.iface.ReadableNBT;
+import de.tr7zw.changeme.nbtapi.wrapper.NBTProxy;
+import de.tr7zw.changeme.nbtapi.wrapper.ProxyBuilder;
+import de.tr7zw.changeme.nbtapi.iface.ReadableNBTList;
 
 /**
  * General utility class for a clean and simple nbt access.

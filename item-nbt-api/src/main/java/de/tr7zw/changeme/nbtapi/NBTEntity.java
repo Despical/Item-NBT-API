@@ -1,9 +1,10 @@
 package de.tr7zw.changeme.nbtapi;
 
-import de.tr7zw.changeme.nbtapi.utils.CheckUtil;
-import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
+
+import de.tr7zw.changeme.nbtapi.utils.CheckUtil;
+import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 
 /**
  * NBT class to access vanilla tags from Entities. Entities don't support custom
@@ -39,8 +40,11 @@ public class NBTEntity extends NBTCompound {
     }
 
     /**
+     * Deprecated: Please use the NBT class
+     * 
      * @param entity Any valid Bukkit Entity
      */
+    @Deprecated
     public NBTEntity(Entity entity) {
         super(null, null);
         if (entity == null) {

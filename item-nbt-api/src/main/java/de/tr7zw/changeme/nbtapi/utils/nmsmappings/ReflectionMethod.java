@@ -1,14 +1,16 @@
 package de.tr7zw.changeme.nbtapi.utils.nmsmappings;
 
-import de.tr7zw.changeme.nbtapi.NbtApiException;
-import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
-import org.bukkit.inventory.ItemStack;
-
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
+import org.bukkit.inventory.ItemStack;
+
+import de.tr7zw.changeme.nbtapi.NbtApiException;
+import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 
 /**
  * This class caches method reflections, keeps track of method name changes
@@ -172,7 +174,7 @@ public enum ReflectionMethod {
             new Since(MinecraftVersion.MC1_7_R4, "getHandle")),
     NMS_WORLD_GET_TILEENTITY(ClassWrapper.NMS_WORLDSERVER, new Class[] { ClassWrapper.NMS_BLOCKPOSITION.getClazz() },
             MinecraftVersion.MC1_8_R3, new Since(MinecraftVersion.MC1_8_R3, "getTileEntity"),
-            new Since(MinecraftVersion.MC1_18_R1, "getBlockState(net.minecraft.core.BlockPos)")),
+            new Since(MinecraftVersion.MC1_18_R1, "getBlockEntity(net.minecraft.core.BlockPos)")),
     NMS_WORLD_SET_TILEENTITY(ClassWrapper.NMS_WORLDSERVER,
             new Class[] { ClassWrapper.NMS_BLOCKPOSITION.getClazz(), ClassWrapper.NMS_TILEENTITY.getClazz() },
             MinecraftVersion.MC1_8_R3, MinecraftVersion.MC1_16_R3,

@@ -1,13 +1,13 @@
 package de.tr7zw.changeme.nbtapi.wrapper;
 
-import de.tr7zw.changeme.nbtapi.NbtApiException;
-
 import java.lang.invoke.MethodHandles.Lookup;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+
+import de.tr7zw.changeme.nbtapi.NbtApiException;
 
 class DefaultMethodInvoker {
 

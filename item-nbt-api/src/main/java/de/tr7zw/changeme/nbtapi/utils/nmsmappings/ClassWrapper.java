@@ -1,11 +1,8 @@
 package de.tr7zw.changeme.nbtapi.utils.nmsmappings;
 
-import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 import org.bukkit.Bukkit;
 
-import java.util.logging.Level;
-
-import static de.tr7zw.changeme.nbtapi.utils.MinecraftVersion.getLogger;
+import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 
 /**
  * Wraps NMS and CRAFT classes
@@ -118,9 +115,6 @@ public enum ClassWrapper {
                 clazz = Class.forName(mojangMap + "." + clazzName);
             } else if (packageId == PackageWrapper.NONE) {
                 clazz = Class.forName(clazzName);
-            } else if (MinecraftVersion.isForgePresent() && MinecraftVersion.getVersion() == MinecraftVersion.MC1_7_R4
-                    && Forge1710Mappings.getClassMappings().get(this.name()) != null) {
-                clazz = Class.forName(clazzName = Forge1710Mappings.getClassMappings().get(this.name()));
             } else if (packageId == PackageWrapper.CRAFTBUKKIT) {
                 // this also works for un-remapped Paper 1.20+
                 clazz = Class.forName(Bukkit.getServer().getClass().getPackage().getName() + "." + clazzName);
@@ -130,7 +124,7 @@ public enum ClassWrapper {
                 clazz = Class.forName(packageId.getUri() + "." + version + "." + clazzName);
             }
         } catch (Throwable ex) {
-            getLogger().log(Level.WARNING, "[NBTAPI] Error while trying to resolve the class '" + clazzName + "'!", ex);
+            ex.printStackTrace();
         }
     }
 

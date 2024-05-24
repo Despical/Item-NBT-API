@@ -1,12 +1,14 @@
 package de.tr7zw.changeme.nbtapi.iface;
 
-import de.tr7zw.changeme.nbtapi.NBTType;
-import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nullable;
 import java.io.OutputStream;
 import java.util.Set;
 import java.util.UUID;
+
+import javax.annotation.Nullable;
+
+import org.bukkit.inventory.ItemStack;
+
+import de.tr7zw.changeme.nbtapi.NBTType;
 
 /**
  * This interface only exposes methods that get data without any changes to the

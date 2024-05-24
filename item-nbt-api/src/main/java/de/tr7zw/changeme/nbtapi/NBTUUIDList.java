@@ -1,12 +1,12 @@
 package de.tr7zw.changeme.nbtapi;
 
-import de.tr7zw.changeme.nbtapi.utils.UUIDUtil;
-import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ClassWrapper;
-import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionMethod;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
+
+import de.tr7zw.changeme.nbtapi.utils.UUIDUtil;
+import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ClassWrapper;
+import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionMethod;
 
 /**
  * Integer implementation for NBTLists

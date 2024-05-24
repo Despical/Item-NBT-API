@@ -1,10 +1,10 @@
 package de.tr7zw.changeme.nbtapi;
 
-import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ClassWrapper;
-import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionMethod;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+
+import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ClassWrapper;
+import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionMethod;
 
 /**
  * Double implementation for NBTLists

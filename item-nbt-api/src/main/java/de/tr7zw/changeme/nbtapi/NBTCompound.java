@@ -1,5 +1,18 @@
 package de.tr7zw.changeme.nbtapi;
 
+import java.io.OutputStream;
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+import org.bukkit.inventory.ItemStack;
+
 import de.tr7zw.changeme.nbtapi.iface.NBTHandler;
 import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
 import de.tr7zw.changeme.nbtapi.iface.ReadableNBT;
@@ -9,14 +22,6 @@ import de.tr7zw.changeme.nbtapi.utils.PathUtil;
 import de.tr7zw.changeme.nbtapi.utils.PathUtil.PathSegment;
 import de.tr7zw.changeme.nbtapi.utils.nmsmappings.Forge1710Mappings;
 import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionMethod;
-import org.bukkit.inventory.ItemStack;
-
-import java.io.OutputStream;
-import java.io.Serializable;
-import java.util.*;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * Base class representing NMS Compounds. For a standalone implementation check

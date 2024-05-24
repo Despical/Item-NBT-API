@@ -1,8 +1,9 @@
 package de.tr7zw.changeme.nbtapi;
 
+import org.bukkit.Chunk;
+
 import de.tr7zw.changeme.nbtapi.utils.CheckUtil;
 import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
-import org.bukkit.Chunk;
 
 public class NBTChunk {
 

@@ -1,14 +1,16 @@
 package de.tr7zw.changeme.nbtapi.utils;
 
+import java.util.UUID;
+
+import javax.annotation.Nullable;
+
 import com.mojang.authlib.GameProfile;
+
 import de.tr7zw.changeme.nbtapi.NBTType;
 import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
 import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBTCompoundList;
 import de.tr7zw.changeme.nbtapi.iface.ReadableNBT;
 import de.tr7zw.changeme.nbtapi.iface.ReadableNBTList;
-
-import javax.annotation.Nullable;
-import java.util.UUID;
 
 public class GameprofileUtil {
 

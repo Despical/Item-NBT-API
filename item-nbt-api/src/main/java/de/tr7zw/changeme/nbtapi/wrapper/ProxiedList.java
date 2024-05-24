@@ -1,11 +1,11 @@
 package de.tr7zw.changeme.nbtapi.wrapper;
 
-import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
-import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBTCompoundList;
-
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+
+import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
+import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBTCompoundList;
 
 class ProxiedList<E extends NBTProxy> implements ProxyList<E> {
 

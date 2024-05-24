@@ -1,10 +1,11 @@
 package de.tr7zw.changeme.nbtapi.handler;
 
+import org.bukkit.inventory.ItemStack;
+
 import de.tr7zw.changeme.nbtapi.NBT;
 import de.tr7zw.changeme.nbtapi.iface.NBTHandler;
 import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
 import de.tr7zw.changeme.nbtapi.iface.ReadableNBT;
-import org.bukkit.inventory.ItemStack;
 
 public class NBTHandlers {
 

@@ -11,9 +11,6 @@ import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
  */
 public class NbtApiException extends RuntimeException {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -993309714559452334L;
     /**
      * Keep track of the plugin selfcheck. Null = not
@@ -66,7 +63,7 @@ public class NbtApiException extends RuntimeException {
             return null;
         if (confirmedBroken == null) {
             return "[?][" + MinecraftVersion.getNBTAPIVersion() + "]" + message;
-        } else if (confirmedBroken == false) {
+        } else if (!confirmedBroken) {
             return "[Selfchecked][" + MinecraftVersion.getNBTAPIVersion() + "]" + message;
         }
 

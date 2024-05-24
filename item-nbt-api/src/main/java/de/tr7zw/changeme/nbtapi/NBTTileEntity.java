@@ -1,9 +1,10 @@
 package de.tr7zw.changeme.nbtapi;
 
-import de.tr7zw.changeme.nbtapi.utils.CheckUtil;
-import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 import org.bukkit.Bukkit;
 import org.bukkit.block.BlockState;
+
+import de.tr7zw.changeme.nbtapi.utils.CheckUtil;
+import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 
 /**
  * NBT class to access vanilla tags from TileEntities. TileEntities don't
@@ -25,7 +26,7 @@ public class NBTTileEntity extends NBTCompound {
      * @param tile     BlockState from any TileEntity
      * @param readonly Readonly makes a copy at init, only reading from that copy
      */
-    public NBTTileEntity(BlockState tile, boolean readonly) {
+    protected NBTTileEntity(BlockState tile, boolean readonly) {
         super(null, null);
         if (tile == null || (MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_8_R3) && !tile.isPlaced())) {
             throw new NullPointerException("Tile can't be null/not placed!");
@@ -40,8 +41,11 @@ public class NBTTileEntity extends NBTCompound {
     }
 
     /**
+     * Deprecated: Please use the NBT class
+     * 
      * @param tile BlockState from any TileEntity
      */
+    @Deprecated
     public NBTTileEntity(BlockState tile) {
         super(null, null);
         if (tile == null || (MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_8_R3) && !tile.isPlaced())) {

@@ -1,10 +1,10 @@
 package de.tr7zw.changeme.nbtapi;
 
+import java.io.InputStream;
+
 import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ClassWrapper;
 import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ObjectCreator;
 import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionMethod;
-
-import java.io.InputStream;
 
 /**
  * A Standalone {@link NBTCompound} implementation. All data is just kept inside

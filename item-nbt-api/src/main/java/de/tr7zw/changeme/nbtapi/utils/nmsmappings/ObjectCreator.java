@@ -1,10 +1,10 @@
 package de.tr7zw.changeme.nbtapi.utils.nmsmappings;
 
-import de.tr7zw.changeme.nbtapi.NbtApiException;
-import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
-
 import java.lang.reflect.Constructor;
 import java.util.logging.Level;
+
+import de.tr7zw.changeme.nbtapi.NbtApiException;
+import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 
 import static de.tr7zw.changeme.nbtapi.utils.MinecraftVersion.getLogger;
 

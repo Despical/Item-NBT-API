@@ -1,11 +1,5 @@
 package de.tr7zw.changeme.nbtapi.wrapper;
 
-import de.tr7zw.changeme.nbtapi.NBTType;
-import de.tr7zw.changeme.nbtapi.NbtApiException;
-import de.tr7zw.changeme.nbtapi.iface.NBTHandler;
-import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
-import de.tr7zw.changeme.nbtapi.wrapper.NBTTarget.Type;
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
@@ -14,6 +8,12 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
+
+import de.tr7zw.changeme.nbtapi.NBTType;
+import de.tr7zw.changeme.nbtapi.NbtApiException;
+import de.tr7zw.changeme.nbtapi.iface.NBTHandler;
+import de.tr7zw.changeme.nbtapi.iface.ReadWriteNBT;
+import de.tr7zw.changeme.nbtapi.wrapper.NBTTarget.Type;
 
 public class ProxyBuilder<T extends NBTProxy> implements InvocationHandler {
 

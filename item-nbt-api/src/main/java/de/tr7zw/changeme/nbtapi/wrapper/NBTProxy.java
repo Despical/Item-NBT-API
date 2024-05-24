@@ -1,10 +1,10 @@
 package de.tr7zw.changeme.nbtapi.wrapper;
 
-import de.tr7zw.changeme.nbtapi.iface.NBTHandler;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
+import de.tr7zw.changeme.nbtapi.iface.NBTHandler;
 
 public interface NBTProxy {
 

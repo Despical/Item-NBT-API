@@ -1,6 +1,7 @@
 package de.tr7zw.changeme.nbtapi;
 
 import com.mojang.authlib.GameProfile;
+
 import de.tr7zw.changeme.nbtapi.utils.GameprofileUtil;
 import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ObjectCreator;

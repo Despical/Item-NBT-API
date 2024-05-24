@@ -1,10 +1,10 @@
 package de.tr7zw.changeme.nbtapi.utils;
 
-import de.tr7zw.changeme.nbtapi.NbtApiException;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+
+import de.tr7zw.changeme.nbtapi.NbtApiException;
 
 public final class ReflectionUtil {
 

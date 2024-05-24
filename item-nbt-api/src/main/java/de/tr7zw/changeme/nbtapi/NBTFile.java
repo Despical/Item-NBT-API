@@ -1,10 +1,10 @@
 package de.tr7zw.changeme.nbtapi;
 
-import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ObjectCreator;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+
+import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ObjectCreator;
 
 /**
  * {@link NBTCompound} implementation backed by a {@link File}
