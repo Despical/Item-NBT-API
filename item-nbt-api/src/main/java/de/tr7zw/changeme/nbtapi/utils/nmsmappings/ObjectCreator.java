@@ -1,12 +1,9 @@
 package de.tr7zw.changeme.nbtapi.utils.nmsmappings;
 
 import java.lang.reflect.Constructor;
-import java.util.logging.Level;
 
 import de.tr7zw.changeme.nbtapi.NbtApiException;
 import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
-
-import static de.tr7zw.changeme.nbtapi.utils.MinecraftVersion.getLogger;
 
 /**
  * This Enum wraps Constructors for NMS classes
@@ -37,7 +34,7 @@ public enum ObjectCreator {
             construct = clazz.getDeclaredConstructor(args);
             construct.setAccessible(true);
         } catch (Exception ex) {
-            getLogger().log(Level.SEVERE, "Unable to find the constructor for the class '" + clazz.getName() + "'", ex);
+            ex.printStackTrace();
         }
     }
 

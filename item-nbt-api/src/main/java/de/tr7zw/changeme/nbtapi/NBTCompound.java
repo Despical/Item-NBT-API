@@ -20,7 +20,6 @@ import de.tr7zw.changeme.nbtapi.utils.CheckUtil;
 import de.tr7zw.changeme.nbtapi.utils.MinecraftVersion;
 import de.tr7zw.changeme.nbtapi.utils.PathUtil;
 import de.tr7zw.changeme.nbtapi.utils.PathUtil.PathSegment;
-import de.tr7zw.changeme.nbtapi.utils.nmsmappings.Forge1710Mappings;
 import de.tr7zw.changeme.nbtapi.utils.nmsmappings.ReflectionMethod;
 
 /**
@@ -1422,12 +1421,8 @@ public class NBTCompound implements ReadWriteNBT {
             Object comp = getResolvedObject();
             if (comp == null)
                 return "{}";
-            if (MinecraftVersion.isForgePresent() && MinecraftVersion.getVersion() == MinecraftVersion.MC1_7_R4) {
-                return Forge1710Mappings.toString(comp);
-            } else {
-                return comp.toString();
-            }
-        } finally {
+			return comp.toString();
+		} finally {
             readLock.unlock();
         }
     }
