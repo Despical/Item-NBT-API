@@ -182,9 +182,27 @@ public class MojangToMapping {
 
     };
 
+    private static Map<String, String> MC1_21R2 = new HashMap<String, String>() {
+        {
+            putAll(MC1_21R1);
+            put("net.minecraft.server.MinecraftServer#registryAccess()", "ba");
+            put("net.minecraft.world.entity.Entity#getEncodeId()", "bK");
+            put("net.minecraft.world.level.block.entity.BlockEntity#getBlockState()", "m");
+        }
+    };
+
+    private static Map<String, String> MC1_21R3 = new HashMap<String, String>() {
+        {
+            putAll(MC1_21R2);
+        }
+    };
 
     public static Map<String, String> getMapping() {
         switch (MinecraftVersion.getVersion()) {
+            case MC1_21_R3:
+                return MC1_21R3;
+            case MC1_21_R2:
+                return MC1_21R2;
             case MC1_21_R1:
                 return MC1_21R1;
             case MC1_20_R4:
