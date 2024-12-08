@@ -28,19 +28,21 @@ public enum MinecraftVersion {
     private final boolean mojangMapping;
 
     // TODO: not nice
+    @SuppressWarnings("serial")
     private static final Map<String, MinecraftVersion> VERSION_TO_REVISION = new HashMap<String, MinecraftVersion>() {
         {
-            this.put("1.20",   MC1_20_R1);
-            this.put("1.20.1", MC1_20_R1);
+            this.put("1.20", MC1_20_R1);
+            this.put("1.20.1",  MC1_20_R1);
             this.put("1.20.2", MC1_20_R2);
             this.put("1.20.3", MC1_20_R3);
             this.put("1.20.4", MC1_20_R3);
             this.put("1.20.5", MC1_20_R4);
             this.put("1.20.6", MC1_20_R4);
-            this.put("1.21",   MC1_21_R1);
+            this.put("1.21", MC1_21_R1);
             this.put("1.21.1", MC1_21_R1);
             this.put("1.21.2", MC1_21_R2);
-            this.put("1.21.3", MC1_21_R3);
+            this.put("1.21.3", MC1_21_R2);
+            this.put("1.21.4", MC1_21_R3);
         }
     };
 
