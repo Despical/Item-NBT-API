@@ -2,11 +2,7 @@ package de.tr7zw.nbtapi;
 
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -189,7 +185,11 @@ public class NBTCompound implements ReadWriteNBT {
     public String getString(String key) {
         try {
             readLock.lock();
-            return (String) NBTReflectionUtil.getData(this, ReflectionMethod.COMPOUND_GET_STRING, key);
+            try {
+                return (String) NBTReflectionUtil.getData(this, ReflectionMethod.COMPOUND_GET_STRING, key);
+            } catch (Exception exception) {
+                return ((Optional<String>) NBTReflectionUtil.getData(this, ReflectionMethod.COMPOUND_GET_STRING, key)).orElseThrow(NoSuchElementException::new);
+            }
         } finally {
             readLock.unlock();
         }
@@ -1342,7 +1342,13 @@ public class NBTCompound implements ReadWriteNBT {
                 Object nbtbase = NBTReflectionUtil.getData(this, ReflectionMethod.COMPOUND_GET, name);
                 if (nbtbase == null)
                     return null;
-                return NBTType.valueOf((byte) ReflectionMethod.COMPOUND_OWN_TYPE.run(nbtbase));
+                return NBTType.valueOf((byte) ReflectionMethod.COMPOUND_OWN_TYPE_LEGACY.run(nbtbase));
+            }
+            if (MinecraftVersion.isAtLeastVersion(MinecraftVersion.MC1_21_R4)) {
+                Object o = NBTReflectionUtil.getData(this, ReflectionMethod.COMPOUND_GET, name);
+                if (o == null)
+                    return null;
+                return NBTType.fromName((String)ReflectionMethod.TAGTYPE_GET_NAME.run(ReflectionMethod.TAGTYPE_OWN_TYPE.run(o)));
             }
             Object o = NBTReflectionUtil.getData(this, ReflectionMethod.COMPOUND_GET_TYPE, name);
             if (o == null)

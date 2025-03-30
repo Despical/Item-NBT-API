@@ -1,116 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>de.tr7zw</groupId>
-  <artifactId>item-nbt-parent</artifactId>
-  <version>1.0.8</version>
-  <packaging>pom</packaging>
-  <inceptionYear>2015</inceptionYear>
-  <organization>
-    <name>tr7zw</name>
-    <url>https://github.com/tr7zw/</url>
-  </organization>
-  <licenses>
-    <license>
-      <name>MIT License</name>
-      <url>https://opensource.org/licenses/mit-license.php</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-  <modules>
-    <module>item-nbt-api</module>
-  </modules>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  <dependencies>
-    <dependency>
-      <groupId>org.spigotmc</groupId>
-      <artifactId>spigot-api</artifactId>
-      <version>1.16.4-R0.1-SNAPSHOT</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.mojang</groupId>
-      <artifactId>datafixerupper</artifactId>
-      <version>4.0.26</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>de.tr7zw.spigotmc.maven</groupId>
-      <artifactId>tr-spigotmc-maven-plugin</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.mojang</groupId>
-      <artifactId>authlib</artifactId>
-      <version>1.5.25</version>
-      <scope>provided</scope>
-    </dependency>
-  </dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.github.Despical</groupId>
+    <artifactId>item-nbt-parent</artifactId>
+    <version>1.0.9</version>
+    <packaging>pom</packaging>
+    <inceptionYear>2015</inceptionYear>
 
-  <repositories>
-    <!-- CodeMC -->
-    <repository>
-      <id>codemc-repo</id>
-      <url>https://repo.codemc.org/repository/maven-public/</url>
-      <layout>default</layout>
-    </repository>
-    <!-- CodeMC NMS -->
-    <repository>
-      <id>codemc-nms-repo</id>
-      <url>https://repo.codemc.org/repository/nms/</url>
-      <layout>default</layout>
-    </repository>
-    <!-- Mojang -->
-    <repository>
-      <id>mojang-libraries</id>
-      <url>https://libraries.minecraft.net/</url>
-      <layout>default</layout>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <!-- CodeMC -->
-    <pluginRepository>
-      <id>codemc-repo</id>
-      <url>https://repo.codemc.org/repository/maven-public/</url>
-      <layout>default</layout>
-    </pluginRepository>
-  </pluginRepositories>
-  <build>
-    <resources>
-      <resource>
-        <filtering>false</filtering>
-        <directory>.</directory>
-        <includes>
-          <include>LICENSE</include>
-        </includes>
-      </resource>
-    </resources>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.11.0</version>
-        <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>3.3.0</version>
-        <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+    <organization>
+        <name>tr7zw</name>
+        <url>https://github.com/tr7zw/</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <modules>
+        <module>item-nbt-api</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.16.4-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.mojang</groupId>
+            <artifactId>datafixerupper</artifactId>
+            <version>4.0.26</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.tr7zw.spigotmc.maven</groupId>
+            <artifactId>tr-spigotmc-maven-plugin</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.mojang</groupId>
+            <artifactId>authlib</artifactId>
+            <version>1.5.25</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <!-- CodeMC -->
+        <repository>
+            <id>codemc-repo</id>
+            <url>https://repo.codemc.org/repository/maven-public/</url>
+            <layout>default</layout>
+        </repository>
+        <!-- CodeMC NMS -->
+        <repository>
+            <id>codemc-nms-repo</id>
+            <url>https://repo.codemc.org/repository/nms/</url>
+            <layout>default</layout>
+        </repository>
+        <!-- Mojang -->
+        <repository>
+            <id>mojang-libraries</id>
+            <url>https://libraries.minecraft.net/</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <!-- CodeMC -->
+        <pluginRepository>
+            <id>codemc-repo</id>
+            <url>https://repo.codemc.org/repository/maven-public/</url>
+            <layout>default</layout>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build>
+        <resources>
+            <resource>
+                <filtering>false</filtering>
+                <directory>.</directory>
+                <includes>
+                    <include>LICENSE</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
