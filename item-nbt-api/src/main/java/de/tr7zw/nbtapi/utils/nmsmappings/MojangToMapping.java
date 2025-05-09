@@ -204,7 +204,6 @@ public class MojangToMapping {
 	public static Map<String, String> getMapping() {
 		switch (MinecraftVersion.getVersion()) {
 			case MC1_21_R4:
-				System.out.println("MC 1.21.5");
 				return MC1_21R4;
 			case MC1_21_R3:
 				return MC1_21R3;
