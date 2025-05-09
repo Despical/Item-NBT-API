@@ -1,5 +1,5 @@
 # New Fork
-This forks only involves NBT usage for items to reduce shaded JAR size and only used in Despical's [InventoryFramework](https:://www.github.com/Despical/InventoryFramework) library.
+This forks only involves NBT usage for items to reduce shaded JAR size and only used in Despical's [InventoryFramework](https://github.com/Despical/InventoryFramework) library.
 
 # Item-NBT-API
 
