@@ -9,7 +9,6 @@ import java.io.OutputStream;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.UUID;
-import java.util.logging.Logger;
 
 /**
  * This class caches method reflections, keeps track of method name changes
@@ -370,11 +369,13 @@ public enum ReflectionMethod {
 				loaded = true;
 				methodName = targetVersion.name;
 			} catch (NullPointerException | NoSuchMethodException | SecurityException ex2) {
+				/*
 				Logger.getAnonymousLogger()
 						.warning("[NBTAPI] Unable to find the method '" + targetMethodName + "' in '"
 								+ (targetClass.getClazz() == null ? targetClass.getMojangName()
 								: targetClass.getClazz().getSimpleName())
 								+ "' Args: " + Arrays.toString(args) + " Enum: " + this); // NOSONAR This gets loaded
+				*/
 				// before the logger is loaded
 			}
 		}

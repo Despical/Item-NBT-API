@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.github.Despical</groupId>
         <artifactId>item-nbt-parent</artifactId>
-        <version>1.1.0</version>
+        <version>1.1.1</version>
     </parent>
 
     <artifactId>Item-NBT-API</artifactId>
